@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# Set script to exit on any errors.
+set -e
+
+# Define directories
+HELLO_CPP_DIR=$(pwd)
+BUILD_DIR=$HELLO_CPP_DIR/build
+EXAMPLE_DIR=$HELLO_CPP_DIR/example
+EXAMPLE_BUILD_DIR=$EXAMPLE_DIR/build
+
+# Clean up any previous build artifacts
+rm -rf $BUILD_DIR
+rm -rf $EXAMPLE_BUILD_DIR
+
+# Step 1: Build the library
+echo "Step 1: Building the library..."
+mkdir -p $BUILD_DIR
+pushd $BUILD_DIR
+cmake ..
+make
+echo "Library built."
+popd
+echo "Press Enter to proceed to the next step..."
+read
+
+# Step 2: Run the tests for the library
+echo "Step 2: Running tests for the library..."
+pushd $BUILD_DIR
+ctest
+echo "Tests completed."
+popd
+echo "Press Enter to proceed to the next step..."
+read
+
+# Step 3: Install the library
+echo "Step 3: Installing the library..."
+pushd $BUILD_DIR
+make install
+echo "Library installed."
+popd
+echo "Press Enter to proceed to the next step..."
+read
+
+# Step 4: Build and run the example
+echo "Step 4: Building the example..."
+mkdir -p $EXAMPLE_BUILD_DIR
+pushd $EXAMPLE_BUILD_DIR
+cmake ..
+make
+echo "Example built."
+echo "Press Enter to run the example..."
+read
+
+echo "Running the example..."
+./example
+echo "Example run completed."
+echo "Build and run completed successfully!"
+popd
+
+# Clean up build directories
+echo "Cleaning up build directories..."
+rm -rf $BUILD_DIR
+rm -rf $EXAMPLE_BUILD_DIR
+echo "Cleanup completed."

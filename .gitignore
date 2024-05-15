@@ -1,0 +1,23 @@
+# Build directories
+build/
+example/build/
+
+# VS Code directory
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# CMake-specific files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+install_manifest.txt
+
+# IDEs and editors
+.idea/
+*.swp
+*~

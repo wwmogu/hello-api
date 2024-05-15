@@ -33,6 +33,9 @@ You can build and run the project using a simple script or by following the deta
 To build and run the entire project, including building the library, running tests, and running the example, simply execute:
 ```sh
 . ./easy
+
+# Enable Interactive mode
+. ./easy -i
 ```
 
 ### Building the API

@@ -3,6 +3,28 @@
 # Set script to exit on any errors.
 set -e
 
+# Parse command-line options
+INTERACTIVE=false
+while getopts "i" opt; do
+  case ${opt} in
+    i )
+      INTERACTIVE=true
+      ;;
+    \? )
+      echo "Usage: $0 [-i]"
+      exit 1
+      ;;
+  esac
+done
+
+# Function to pause for user input if in interactive mode
+function pause() {
+  if $INTERACTIVE; then
+    echo "Press Enter to proceed to the next step..."
+    read
+  fi
+}
+
 # Define directories
 HELLO_CPP_DIR=$(pwd)
 BUILD_DIR=$HELLO_CPP_DIR/build
@@ -21,8 +43,7 @@ cmake ..
 make
 echo "Library built."
 popd
-echo "Press Enter to proceed to the next step..."
-read
+pause
 
 # Step 2: Run the tests for the library
 echo "Step 2: Running tests for the library..."
@@ -30,8 +51,7 @@ pushd $BUILD_DIR
 ctest
 echo "Tests completed."
 popd
-echo "Press Enter to proceed to the next step..."
-read
+pause
 
 # Step 3: Install the library
 echo "Step 3: Installing the library..."
@@ -39,8 +59,7 @@ pushd $BUILD_DIR
 make install
 echo "Library installed."
 popd
-echo "Press Enter to proceed to the next step..."
-read
+pause
 
 # Step 4: Build and run the example
 echo "Step 4: Building the example..."
@@ -49,8 +68,7 @@ pushd $EXAMPLE_BUILD_DIR
 cmake ..
 make
 echo "Example built."
-echo "Press Enter to run the example..."
-read
+pause
 
 echo "Running the example..."
 ./example

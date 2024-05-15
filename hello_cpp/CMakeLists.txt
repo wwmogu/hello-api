@@ -15,7 +15,7 @@ enable_testing()
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/release-1.10.0.tar.gz
+  URL https://github.com/google/googletest/archive/release-1.12.0.tar.gz
 )
 
 # Prevent Google Test from installing its own files
@@ -23,13 +23,13 @@ set(INSTALL_GTEST OFF CACHE BOOL "Disable installation of GTest")
 set(INSTALL_GMOCK OFF CACHE BOOL "Disable installation of GMock")
 set(BUILD_GMOCK OFF CACHE BOOL "Disable building of GMock")
 
-# # For Windows: Prevent overriding the parent project's compiler/linker settings
-# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-# Add compile options to disable treating warnings as errors for Google Test
-set(GTEST_DISABLE_WERROR ON CACHE BOOL "Disable treating warnings as errors for Google Test")
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
+
+# Add compile options to disable treating warnings as errors for Google Test
+add_compile_options(-Wno-error=maybe-uninitialized)
 
 # Add the test executable
 add_executable(test_hello test/test_hello.cpp)

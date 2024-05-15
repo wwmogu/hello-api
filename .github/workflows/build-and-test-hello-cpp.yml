@@ -1,0 +1,34 @@
+name: Build and Test hello-cpp
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up CMake
+      uses: jwlawson/actions-setup-cmake@v1
+
+    - name: Create build directory
+      run: mkdir -p hello_cpp/build
+
+    - name: Build the project
+      run: |
+        cd hello_cpp/build
+        cmake ..
+        make
+
+    - name: Run tests
+      run: |
+        cd hello_cpp/build
+        ctest

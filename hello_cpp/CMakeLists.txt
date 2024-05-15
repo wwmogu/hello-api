@@ -31,6 +31,9 @@ set(GTEST_DISABLE_WERROR ON CACHE BOOL "Disable treating warnings as errors for 
 
 FetchContent_MakeAvailable(googletest)
 
+# Add compile options to disable treating warnings as errors for Google Test
+add_compile_options(-Wno-error=maybe-uninitialized)
+
 # Add the test executable
 add_executable(test_hello test/test_hello.cpp)
 

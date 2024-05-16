@@ -43,3 +43,4 @@ venv.bak/
 
 # Egg info
 *.egg-info/
+EGG-INFO/

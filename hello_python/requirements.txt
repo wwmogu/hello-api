@@ -1,0 +1,6 @@
+setuptools
+pytest
+tox
+tox-gh-actions
+cython
+

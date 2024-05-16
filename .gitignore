@@ -21,3 +21,25 @@ install_manifest.txt
 .idea/
 *.swp
 *~
+
+# Python-specific files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+env.bak/
+venv.bak/
+
+# tox
+.tox/
+.pytest_cache/
+
+# Egg info
+*.egg-info/
